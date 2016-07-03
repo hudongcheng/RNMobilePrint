@@ -14,8 +14,8 @@ import { connect } from 'react-redux'
 
 type Props = {
   counter: PropTypes.number;
-  increment: () => void;
-  ecrement: () => void;
+  // onIncrement: () => void;
+  // onDecrement: () => void;
 };
 
 class App extends Component {
@@ -30,30 +30,30 @@ class App extends Component {
     // }
   }
 
-  // onIncrement() {
-  //   //this.props.dispatch({type:'INCREMENT'});
-  //   alert('inc ' + this.props.value);
-  // }
+  onIncrement() {
+    //this.props.dispatch({type:'INCREMENT'});
+    alert('inc ' + this.props.value);
+  }
 
-  // onDecrement() {
-  //   //this.props.dispatch({type:'DECREMENT'});
-  //   alert('dec ' + this.props.value);
-  // }
+  onDecrement() {
+    //this.props.dispatch({type:'DECREMENT'});
+    alert('dec ' + this.props.value);
+  }
 
   render() {
-    const {increment, decrement, counter} = this.props
+    const {dispatch, store} = this.props
 
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Clicked: {counter} times
+          Clicked: {this.props.counter} times
         </Text>
-        <TouchableHighlight onPress={increment}>
+        <TouchableHighlight onPress={this.props.onIncrement.bind(this)}>
           <Text style={styles.instructions}>
             increment
           </Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={decrement}>
+        <TouchableHighlight onPress={this.props.onDecrement.bind(this)}>
           <Text style={styles.instructions}>
             decrement
           </Text>
@@ -95,8 +95,8 @@ function select(store) {
 
 function actions(dispatch) {
   return {
-    increment: () => dispatch({type:'INCREMENT'}),
-    decrement: () => dispatch({type:'DECREMENT'}),
+    onIncrement: () => dispatch({type:'INCREMENT'}),
+    onDecrement: () => dispatch({type:'DECREMENT'}),
   };
 }
 

@@ -5,26 +5,12 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
-
-import { createStore } from 'redux'
+import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux'
-
 import App from './js/containers/App';
-import counter from './js/reducers'
+import configureStore from './js/store/configureStore';
 
-
-const store = createStore(counter)
-
-store.subscribe(() =>
-  alert(store.getState())
-)
+const store = configureStore();
 
 class RNMobilePrint extends Component {
   render() {
@@ -35,5 +21,9 @@ class RNMobilePrint extends Component {
     )
   }
 }
+
+store.subscribe(() =>
+  alert(store.getState().counter)
+)
 
 AppRegistry.registerComponent('RNMobilePrint', () => RNMobilePrint);
